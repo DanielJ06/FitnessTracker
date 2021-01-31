@@ -1,7 +1,9 @@
 package com.danieljrodrigues.fitnesstracker;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +42,16 @@ public class ImcActivity extends AppCompatActivity {
 
                 int response = imcResponse(result);
 
-                Toast.makeText(ImcActivity.this, response, Toast.LENGTH_LONG).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ImcActivity.this);
+                dialog.setTitle(getString(R.string.imc_response, result))
+                        .setMessage(response)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).create();
+                dialog.show();
             }
         });
     }
@@ -66,7 +77,7 @@ public class ImcActivity extends AppCompatActivity {
     }
 
     private double calculateImc(int height, int weight) {
-        return weight / ( ((double) height / 100) * ((double) height / 100) );
+        return weight / (((double) height / 100) * ((double) height / 100));
     }
 
     private boolean validateInputs() {
