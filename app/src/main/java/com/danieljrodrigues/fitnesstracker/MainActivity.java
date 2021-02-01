@@ -19,7 +19,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View cardBtn;
     private RecyclerView rvMain;
 
     @Override
@@ -27,12 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        cardBtn = findViewById(R.id.Card);
-//
-//        cardBtn.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, ImcActivity.class);
-//            startActivity(intent);
-//        });
         rvMain = findViewById(R.id.rv_main);
 
         List<MainItem> mainItems = new ArrayList<>();
@@ -40,12 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
         rvMain.setLayoutManager(new LinearLayoutManager(this));
         MainAdapter adapter = new MainAdapter(mainItems);
+        adapter.setListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ImcActivity.class);
+            startActivity(intent);
+        });
         rvMain.setAdapter(adapter);
     }
 
-    private class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+    private class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder> {
 
         private List<MainItem> mainItems;
+        private onItemClickListener listener;
 
         public MainAdapter(List<MainItem> mainItems) {
             this.mainItems = mainItems;
@@ -60,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
+        public void setListener(onItemClickListener listener) {
+            this.listener = listener;
+        }
+
         @Override
         public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
             MainItem current = mainItems.get(position);
@@ -70,21 +72,25 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return mainItems.size();
         }
-    }
 
-    private class MainViewHolder extends RecyclerView.ViewHolder {
-        public MainViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
+        private class MainViewHolder extends RecyclerView.ViewHolder {
+            public MainViewHolder(@NonNull View itemView) {
+                super(itemView);
+            }
 
-        public void bind(MainItem mainItemIndex) {
-            TextView title = itemView.findViewById(R.id.rv_title);
-            ImageView icon = itemView.findViewById(R.id.rv_drawable);
-            LinearLayout container = (LinearLayout) itemView;
+            public void bind(MainItem mainItemIndex) {
+                TextView title = itemView.findViewById(R.id.rv_title);
+                ImageView icon = itemView.findViewById(R.id.rv_drawable);
+                LinearLayout container = (LinearLayout) itemView;
 
-            title.setText(mainItemIndex.getTextStringId());
-            icon.setImageResource(mainItemIndex.getDrawableId());
-            container.setBackgroundColor(mainItemIndex.getColor());
+                container.setOnClickListener(v -> {
+                    listener.onClick(mainItemIndex.getId());
+                });
+
+                title.setText(mainItemIndex.getTextStringId());
+                icon.setImageResource(mainItemIndex.getDrawableId());
+                container.setBackgroundColor(mainItemIndex.getColor());
+            }
         }
     }
 }
