@@ -27,36 +27,30 @@ public class ImcActivity extends AppCompatActivity {
 
         Button submitBtn = findViewById(R.id.submitBtn);
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!validateInputs()) {
-                    Toast.makeText(ImcActivity.this, R.string.fields_message, Toast.LENGTH_LONG).show();
-                    return;
-                }
+        submitBtn.setOnClickListener(v -> {
+            if (!validateInputs()) {
+                Toast.makeText(ImcActivity.this, R.string.fields_message, Toast.LENGTH_LONG).show();
+                return;
+            }
 
-                String sHeight = editHeight.getText().toString();
-                String sWeight = editWeight.getText().toString();
+            String sHeight = editHeight.getText().toString();
+            String sWeight = editWeight.getText().toString();
 
-                int height = Integer.parseInt(sHeight);
-                int weight = Integer.parseInt(sWeight);
-                double result = calculateImc(height, weight);
+            int height = Integer.parseInt(sHeight);
+            int weight = Integer.parseInt(sWeight);
+            double result = calculateImc(height, weight);
 
-                int response = imcResponse(result);
+            int response = imcResponse(result);
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ImcActivity.this);
-                dialog.setTitle(getString(R.string.imc_response, result))
-                        .setMessage(response)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {}
-                        }).create();
-                dialog.show();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(ImcActivity.this);
+            dialog.setTitle(getString(R.string.imc_response, result))
+                    .setMessage(response)
+                    .setPositiveButton(android.R.string.ok, (dialog1, which) -> {}).create();
+            dialog.show();
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editHeight.getWindowToken(), 0);
-                imm.hideSoftInputFromWindow(editWeight.getWindowToken(), 0);
-            };
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editHeight.getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(editWeight.getWindowToken(), 0);
         });
     }
 
