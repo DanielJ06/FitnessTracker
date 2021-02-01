@@ -3,9 +3,11 @@ package com.danieljrodrigues.fitnesstracker;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,12 +49,14 @@ public class ImcActivity extends AppCompatActivity {
                         .setMessage(response)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
+                            public void onClick(DialogInterface dialog, int which) {}
                         }).create();
                 dialog.show();
-            }
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editHeight.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(editWeight.getWindowToken(), 0);
+            };
         });
     }
 
