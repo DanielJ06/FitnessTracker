@@ -42,10 +42,21 @@ public class ImcActivity extends AppCompatActivity {
 
             int response = imcResponse(result);
 
-            AlertDialog.Builder dialog = new AlertDialog.Builder(ImcActivity.this);
-            dialog.setTitle(getString(R.string.imc_response, result))
-                    .setMessage(response)
-                    .setPositiveButton(android.R.string.ok, (dialog1, which) -> {}).create();
+            AlertDialog dialog = new AlertDialog.Builder(ImcActivity.this)
+                .setTitle(getString(R.string.imc_response, result))
+                .setMessage(response)
+                .setPositiveButton(android.R.string.ok, (dialog1, which) -> {
+                })
+                .setNegativeButton(R.string.save, ((dialog1, which) -> {
+                    new Thread(() -> {
+                        long calcId = SqlHelper.getInstance(ImcActivity.this).addItem("IMC", result);
+                        runOnUiThread(() -> {
+                            if (calcId > 0) {
+                                Toast.makeText(ImcActivity.this, R.string.calc_saved, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }).start();
+                })).create();
             dialog.show();
 
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -80,9 +91,9 @@ public class ImcActivity extends AppCompatActivity {
 
     private boolean validateInputs() {
         return (!editHeight.getText().toString().startsWith("0") &&
-                !editHeight.getText().toString().isEmpty() &&
-                !editWeight.getText().toString().startsWith("0") &&
-                !editWeight.getText().toString().isEmpty()
+            !editHeight.getText().toString().isEmpty() &&
+            !editWeight.getText().toString().startsWith("0") &&
+            !editWeight.getText().toString().isEmpty()
         );
     }
 }
