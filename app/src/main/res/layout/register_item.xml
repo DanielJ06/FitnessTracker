@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_registerContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_500"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_marginBottom="5dp"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp">
+
+    <TextView
+        android:id="@+id/rv_registerType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMC"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/rv_registerValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:text="TA"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/rv_registerDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMC"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

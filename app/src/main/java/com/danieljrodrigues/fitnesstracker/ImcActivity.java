@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -46,6 +47,9 @@ public class ImcActivity extends AppCompatActivity {
                 .setTitle(getString(R.string.imc_response, result))
                 .setMessage(response)
                 .setPositiveButton(android.R.string.ok, (dialog1, which) -> {
+                    Intent intent = new Intent(ImcActivity.this, ListCalcActivity.class);
+                    intent.putExtra("type", "IMC");
+                    startActivity(intent);
                 })
                 .setNegativeButton(R.string.save, ((dialog1, which) -> {
                     new Thread(() -> {
@@ -53,6 +57,9 @@ public class ImcActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             if (calcId > 0) {
                                 Toast.makeText(ImcActivity.this, R.string.calc_saved, Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(ImcActivity.this, ListCalcActivity.class);
+                                intent.putExtra("type", "IMC");
+                                startActivity(intent);
                             }
                         });
                     }).start();
