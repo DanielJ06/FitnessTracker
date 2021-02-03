@@ -20,7 +20,6 @@ import java.util.List;
 public class ListCalcActivity extends AppCompatActivity {
 
     private RecyclerView rvRegisters;
-    private int registersLenght;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,6 @@ public class ListCalcActivity extends AppCompatActivity {
         if (extras != null) {
             String type = extras.getString("type");
             List<Register> registers = SqlHelper.getInstance(this).getItemsBy(type);
-            registersLenght = registers.size();
 
             CalcAdapter adapter = new CalcAdapter(registers);
             rvRegisters.setAdapter(adapter);
@@ -64,7 +62,7 @@ public class ListCalcActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return registersLenght;
+            return registeredItems.size();
         }
 
         private class RegisterHolder extends RecyclerView.ViewHolder {
