@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TmbActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@string/tmb_desc" />
+
+        <EditText
+            android:id="@+id/edit_tmb_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:hint="@string/weight"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edit_tmb_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:hint="@string/height"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edit_tmb_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:hint="@string/age"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/edit_tmb_lifeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/tmb_lifeStyle"
+            android:layout_marginBottom="40dp"
+            />
+
+        <Button
+            android:id="@+id/submitTmbBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_button_accent"
+            android:text="@string/calc"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</ScrollView>

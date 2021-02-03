@@ -30,12 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         List<MainItem> mainItems = new ArrayList<>();
         mainItems.add(new MainItem(1, R.drawable.imc_icon, R.string.imc, R.color.purple_700));
+        mainItems.add(new MainItem(2, R.drawable.tmb_ic, R.string.tmb, R.color.purple_700));
 
         rvMain.setLayoutManager(new LinearLayoutManager(this));
         MainAdapter adapter = new MainAdapter(mainItems);
-        adapter.setListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ImcActivity.class);
-            startActivity(intent);
+        adapter.setListener(id -> {
+            switch (id) {
+                case 1:
+                    startActivity(new Intent(MainActivity.this, ImcActivity.class));
+                    return;
+                case 2:
+                    startActivity(new Intent(MainActivity.this, TmbActivity.class));
+                    return;
+            }
         });
         rvMain.setAdapter(adapter);
     }

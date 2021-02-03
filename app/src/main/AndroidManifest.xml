@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessTracker">
+        <activity android:name=".TmbActivity"></activity>
         <activity android:name=".ListCalcActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ImcActivity"/>
+                android:value=".ImcActivity" />
         </activity>
         <activity android:name=".ImcActivity" />
         <activity android:name=".MainActivity">
