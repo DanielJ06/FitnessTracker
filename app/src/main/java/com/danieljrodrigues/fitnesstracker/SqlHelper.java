@@ -25,7 +25,7 @@ public class SqlHelper extends SQLiteOpenHelper {
     }
 
     public static SqlHelper getInstance(Context context) {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = new SqlHelper(context);
         }
         return INSTANCE;
@@ -97,5 +97,21 @@ public class SqlHelper extends SQLiteOpenHelper {
             }
         }
         return calcId;
+    }
+
+    public long deleteItem(String type, int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        long resId = 0;
+
+        try {
+            resId = db.delete("calc", "id = ? and type_calc = ?", new String[]{String.valueOf(id), type});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e("SQLite", e.getMessage(), e);
+        } finally {
+            db.endTransaction();
+        }
+        return resId;
     }
 }
