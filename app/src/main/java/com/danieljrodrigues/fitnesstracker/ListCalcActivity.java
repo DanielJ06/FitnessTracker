@@ -106,7 +106,7 @@ public class ListCalcActivity extends AppCompatActivity {
 
                 itemView.setOnLongClickListener(v -> {
                     Log.i("TESTE", String.valueOf(registerIndex.type));
-                    onClickListener.onLongPress(getAdapterPosition(), registerIndex.type, registerIndex.id);
+                    onClickListener.onLongPress(getAdapterPosition(), registerIndex.type, registerIndex.getId());
                     return false;
                 });
 

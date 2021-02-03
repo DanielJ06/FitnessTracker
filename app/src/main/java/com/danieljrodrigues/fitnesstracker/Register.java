@@ -5,4 +5,8 @@ public class Register {
     String type;
     double res;
     String created_at;
+
+    public int getId() {
+        return id;
+    }
 }
